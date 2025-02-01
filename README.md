@@ -34,7 +34,7 @@ To run the programs on two different devices, connect the devices using an **Eth
    ```sh
    ping 192.168.1.1  # Run from Device 2 '''
 
-### 3. Run the sniffer and player
+#### 3. Run the sniffer and player
 Run the packet_capture.py and replay.py 
 
 
