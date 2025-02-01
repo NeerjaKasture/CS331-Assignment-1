@@ -1,8 +1,15 @@
-## Part 1: Question 4 Setup
+## Part 1: 
+### Setup for question 1,2,3 
+
+Use wsl for windows to run the following:
+tcpreplay -i eth0 --mbps=100 4.pcap
+python packet_sniffer.py 
+
+### Question 4 Setup
 
 To run the programs on two different devices, connect the devices using an **Ethernet cable**. Follow these steps to ensure they are correctly connected:
 
-### 1. Configure Network Settings  
+#### 1. Configure Network Settings  
 1. Open **Control Panel** > **Network and Internet** > **Network and Sharing Center**.  
 2. Click **Change adapter settings**.  
 3. Identify the Ethernet connection associated with the cable.  
@@ -20,9 +27,15 @@ To run the programs on two different devices, connect the devices using an **Eth
 
 7. Click **OK** and close all windows.
 
-### 2. Verify the Connection  
+#### 2. Verify the Connection  
 1. Open **Command Prompt (cmd)** or **Terminal**.  
 2. Run the following command from one device:  
 
    ```sh
-   ping 192.168.1.1  # Run from Device 2
+   ping 192.168.1.1  # Run from Device 2 '''
+
+### 3. Run the sniffer and player
+Run the packet_capture.py and replay.py 
+
+
+   
