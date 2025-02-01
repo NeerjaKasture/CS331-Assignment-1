@@ -19,7 +19,7 @@ def extract_hidden_message(pcap_file):
     
     return hidden_message, count, checksum
 
-pcap_file = "4.pcap"  
+pcap_file = "capture.pcap"  
 hidden_message, total_packets, checksum = extract_hidden_message(pcap_file)
 
 if hidden_message:
