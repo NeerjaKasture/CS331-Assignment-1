@@ -34,11 +34,13 @@ def raw_packet_sniffer(interface="Ethernet 4", capture_file="capture.pcap"):
     packet_sizes = []
 
     pcap_writer = PcapWriter(capture_file, append=True, sync=True)
+    start_time = time.time()
 
     print(f"[*] Waiting for traffic on {interface}... Press Ctrl + C to stop.")
 
     sniff_thread = threading.Thread(target=sniff_packets, args=(interface,), daemon=True)
     sniff_thread.start()
+
 
     try:
         while sniff_thread.is_alive():
@@ -46,8 +48,10 @@ def raw_packet_sniffer(interface="Ethernet 4", capture_file="capture.pcap"):
     except KeyboardInterrupt:
         print("\n[!] Stopping sniffing...")
         stop_sniffing = True
-        sniff_thread.join()  
+        end_time = time.time()
+        sniff_thread.join()
 
+    duration= end_time-start_time
     avg_size = total_bytes / packet_count if packet_count > 0 else 0
     print("\n--- Sniffing Summary ---")
     print(f"Total Packets Captured: {packet_count}")
@@ -55,6 +59,8 @@ def raw_packet_sniffer(interface="Ethernet 4", capture_file="capture.pcap"):
     print(f"Minimum Packet Size: {min_size} bytes")
     print(f"Maximum Packet Size: {max_size} bytes")
     print(f"Average Packet Size: {avg_size:.2f} bytes")
+    print(f"Speed in Mbps", total_bytes/duration)
+    print(f"Speed in pps= ", packet_count/duration)
 
     plt.figure(figsize=(10, 5))
     plt.hist(packet_sizes, bins=50, color="blue", edgecolor="black")
@@ -66,4 +72,4 @@ def raw_packet_sniffer(interface="Ethernet 4", capture_file="capture.pcap"):
     print("[*] Histogram saved as packet_size_distribution.png")
 
 
-raw_packet_sniffer(interface="Ethernet 4")
+raw_packet_sniffer(interface="eth0")
